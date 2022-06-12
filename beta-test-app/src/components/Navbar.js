@@ -10,6 +10,8 @@ import {
     Link
   } from "react-router-dom";
 import SignUp from "./SignUp";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { useState } from "react";
 
 const navbarStyles = {
     link: {
@@ -27,7 +29,27 @@ const navbarStyles = {
     },
 }
 
+
+
+
 function Navbar() {
+    const [user, setUser] = useState();
+    const auth = getAuth();
+    onAuthStateChanged(auth, (u) => {
+        if (u) {
+          // User is signed in, see docs for a list of available properties
+          // https://firebase.google.com/docs/reference/js/firebase.User
+          const uid = u.uid;
+          // ...
+        //   console.log(u);
+          setUser(u)
+        } else {
+          // User is signed out
+          // ...
+        }
+      });
+
+      console.log(user);
     return (
         <BrowserRouter>
             <div>
@@ -48,6 +70,7 @@ function Navbar() {
                         <a href="login.js" style={navbarStyles.link}>Login</a>
                         {/* <Link to="/login" style={navbarStyles.link}>Login</Link> */}
                     </li>
+                    {user && <p>Logged in as {user.email}</p>}
                     
                 </ul>
             </div>
