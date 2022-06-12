@@ -62,7 +62,7 @@ class SignUp extends React.Component {
                 <h1>Sign Up</h1>
                 <p>Already have an account? <a href="./login.js" style={loginStyles.linkStyle}>Login</a></p>
                 {this.state.userType === "" && (<>
-                    <p><h4>Select User Type</h4></p>
+                    <h4>Select User Type</h4>
                     <button type="button" className="user" data-type="Beta Tester" onClick={this.handleClick}  style={loginStyles.submit}>Beta Tester</button>  
                     <p>or</p>         
                     <button type="button" className="user" data-type="Product Owner" onClick={this.handleClick} style={loginStyles.submit}>Product Owner</button> 

@@ -1,5 +1,6 @@
 import React from "react";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { createUser } from "../db/User";
 
 class OwnerForm extends React.Component {
     constructor(props) {
@@ -21,6 +22,8 @@ class OwnerForm extends React.Component {
                     const user = userCredential.user;
                     // ...
                     console.log(user);
+                    createUser(user.uid, this.state);
+
                     this.setState({
                         ...this.state,
                         error: null

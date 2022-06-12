@@ -2,6 +2,7 @@ import React from "react";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { components } from "react-select";
 import { default as ReactSelect } from "react-select";
+import { createUser } from "../db/User";
 
 const Option = (props) => {
   return (
@@ -28,7 +29,7 @@ class TesterForm extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        alert(this.state);
+        alert(JSON.stringify(this.state));
 
         if(this.state.email && this.state.password && this.state.passwordConfirm) {
             if (this.state.password  === this.state.passwordConfirm) {
@@ -38,6 +39,7 @@ class TesterForm extends React.Component {
                     const user = userCredential.user;
                     // ...
                     console.log(user);
+                    createUser(user.uid, this.state);
                     this.setState({
                         ...this.state,
                         error: null
@@ -144,7 +146,7 @@ class TesterForm extends React.Component {
                     </label>
                     
                     <span 
-                        class="d-inline-block"
+                        className="d-inline-block"
                         data-toggle="popover"
                         data-trigger="focus"
                         data-content="Please select account(s)">
