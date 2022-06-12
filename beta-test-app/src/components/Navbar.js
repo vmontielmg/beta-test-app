@@ -17,7 +17,11 @@ import { getDatabase, onValue, ref } from "firebase/database";
 const navbarStyles = {
     link: {
         display: "inline",
-        textDecoration: "none"
+        textDecoration: "none",
+        color: "#FFF",
+        fontSize: "2xlarge",
+        justifyContent: "center",
+        paddingTop: 3
     },
     menu: {
         display: "inline",
