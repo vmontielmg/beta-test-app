@@ -11,13 +11,33 @@ class OwnerForm extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        alert(this.state)
+        alert(this.state);
+
+        if(this.state.email && this.state.password && this.state.passwordConfirm) {
+            if (this.state.password  === this.state.passwordConfirm) {
+                const auth = getAuth();
+                createUserWithEmailAndPassword(auth, this.state.email, this.state.password).then((userCredential) => {
+                    // Signed in 
+                    const user = userCredential.user;
+                    // ...
+                    console.log(user);
+                  })
+                  .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    // ..
+                    console.log(errorCode, errorMessage);
+                  });
+            } else {
+                alert("Passwords do not match")
+            }
+        }
     }
 
-    onChange = (key, e) => {
+    onChange = (e) => {
         this.setState({
             ...this.state,
-            [key]: e.target.value
+            [e.target.name]: e.target.value
         })
     }
 
@@ -26,27 +46,27 @@ class OwnerForm extends React.Component {
             <div className="ownerForm">
                 <form onSubmit={this.handleSubmit}>
                     <label> First Name
-                        <input type="text" onChange={(e) => this.onChange("firstName", e)} />
+                        <input type="text" name="firstName" onChange={this.onChange} />
                     </label>
                     <label> Last Name
-                        <input type="text"onChange={(e) => this.onChange("lastName", e)}  />
+                        <input type="text" name="lastName" onChange={this.onChange}  />
                     </label>
                     <label> Company
-                        <input type="text"onChange={(e) => this.onChange("lastName", e)}  />
+                        <input type="text" name="company" onChange={this.onChange}  />
                     </label>
                     <label> Email
-                        <input type="email" onChange={(e) => this.onChange("email", e)} />
+                        <input type="email" name="email" onChange={this.onChange} />
                     </label>
                     <label> Password
-                        <input type="password" onChange={(e) => this.onChange("password", e)} />
+                        <input type="password" name="password" onChange={this.onChange} />
                     </label>
                     <label> Confirm Password
-                        <input type="password" onChange={(e) => this.onChange("passwordConfirm", e)} />
+                        <input type="password" name="passwordConfirm" onChange={this.onChange} />
                     </label>
                     <label> Optional: Select a label for your project...?
                         <input type="checkbox" id="" name="" value="" />
                     </label>
-                    <button type="submit">Submit</button>
+                    <button type="submit" disabled={!(this.state.email && this.state.password && this.state.passwordConfirm)}>Submit</button>
                 </form>
             </div>
         );

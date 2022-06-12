@@ -1,3 +1,4 @@
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import React from "react";
 
 class Login extends React.Component {
@@ -5,27 +6,46 @@ class Login extends React.Component {
         super(props);
         this.state = {
             email: "",
-            password: ""
+            password: "",
         };
 
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleInputChange(event) {
-        event.preventDefault();
-        const target = event.target;
+    handleInputChange(e) {
         this.setState({
-            [target.email]: target.value,
+            ...this.state,
+            [e.target.name]: e.target.value,
         });
     }
 
-    handleSubmit(event) {
-        event.preventDefault();
-        this.setState({
-            email: this.state.email,
-            password: this.password
-        });
+    handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(e.target.name);
+        if(this.state.email && this.state.password) {
+            const auth = getAuth();
+            signInWithEmailAndPassword(auth, this.state.email, this.state.password).then((userCredential) => {
+                // Signed in 
+                const user = userCredential.user;
+                // ...
+                console.log(user);
+                this.setState({
+                    ...this.state,
+                    error: null
+                });
+                })
+                .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                // ..
+                console.log(errorCode, errorMessage);
+                this.setState({
+                    ...this.state,
+                    error: errorCode
+                })
+                });
+        }
     }
 
     render() {
@@ -38,13 +58,14 @@ class Login extends React.Component {
             <div className="login">
                 <form onSubmit={this.handleSubmit}>
                     <h2>Login</h2>
+                    {this.state.error && <p style={{color: "red"}}>An error occurred: {this.state.error}</p>}
                     <label>
                         <p>Email</p>
-                        <input type="text" name="email" value={this.state.value} onChange={this.handleInputChange} required />
+                        <input type="email" name="email" value={this.state.email} onChange={this.handleInputChange} required />
                     </label>
                     <label>
                         <p>Password</p>
-                        <input type="password" name="password" value={this.state.value} onChange={this.handleInputChange} required />
+                        <input type="password" name="password" value={this.state.password} onChange={this.handleInputChange} required />
                     </label>
                     <p>
                         <a href="#top">Forgot Password?</a>
