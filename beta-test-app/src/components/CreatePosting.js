@@ -26,7 +26,6 @@ class CreatePosting extends React.Component {
     }
 
     render() {
-
         const postStyles = {
             card: {
                 border: "2px solid #0D3B66",
@@ -62,7 +61,7 @@ class CreatePosting extends React.Component {
             }
         }
         return (
-            <div>
+            <div style={postStyles.card}>
                 <h1>Create a Posting</h1>
                 <h3>Let's find some beta testers!</h3>
 

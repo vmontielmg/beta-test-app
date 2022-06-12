@@ -19,9 +19,10 @@ const navbarStyles = {
         display: "inline",
         textDecoration: "none",
         color: "#FFF",
-        fontSize: "2xlarge",
+        fontSize: "large",
         justifyContent: "center",
-        paddingTop: 3
+        paddingTop: 1,
+        verticalAlign: "sub"
     },
     menu: {
         display: "inline",
@@ -30,7 +31,8 @@ const navbarStyles = {
     item: {
         display: "inline",
         margin: 0,
-        padding: 10
+        padding: 10,
+        verticalAlign: "sub"
     }
 }
 

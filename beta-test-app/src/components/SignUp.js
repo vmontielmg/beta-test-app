@@ -3,6 +3,7 @@ import React from "react";
 import OwnerForm from "./OwnerForm";
 import TesterForm from "./TesterForm";
 import "../index.css";
+import CreatePosting from "./CreatePosting";
 
 class SignUp extends React.Component {
     constructor(props) {
@@ -58,6 +59,8 @@ class SignUp extends React.Component {
         }
 
         return (
+            <div>
+            <CreatePosting />
             <div className="SignUp" style={loginStyles.card}>
                 <h1>Sign Up</h1>
                 <p>Already have an account? <a href="./login.js" style={loginStyles.linkStyle}>Login</a></p>
@@ -70,6 +73,7 @@ class SignUp extends React.Component {
                 {this.state.userType !== "" && <p>Signing up as a {this.state.userType}</p>}
                 {this.state.userType === "Beta Tester" && <TesterForm />}
                 {this.state.userType === "Product Owner" && <OwnerForm />}
+            </div>
             </div>
         );
     }
