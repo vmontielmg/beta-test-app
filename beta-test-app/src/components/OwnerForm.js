@@ -68,10 +68,9 @@ class OwnerForm extends React.Component {
                 backgroundColor: "#FFFEFB",
                 color: "#0D3B66",
                 padding: "5% 3%",
-                display: "inline-block"
             },
             input: {
-                width: 100,
+                width: 150,
                 height: 15,
                 borderRadius: 5,
                 margin: 0,

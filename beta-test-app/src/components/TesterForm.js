@@ -86,7 +86,7 @@ class TesterForm extends React.Component {
                 padding: "5% 3%"
             },
             input: {
-                width: 100,
+                width: 150,
                 height: 15,
                 borderRadius: 5,
                 margin: 0,

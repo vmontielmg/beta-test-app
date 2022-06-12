@@ -36,3 +36,17 @@
     transform: rotate(360deg);
   }
 }
+
+.testerForm form, .ownerForm form {
+  padding: 10px;
+}
+
+.testerForm form > *, .ownerForm form > * {
+  display: block;
+}
+
+.testerForm form label p, .ownerForm form label p {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
