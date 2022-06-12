@@ -1,4 +1,6 @@
 import React from "react";
+import OwnerForm from "./OwnerForm";
+import TesterForm from "./TesterForm";
 
 class SignUp extends React.Component {
     constructor(props) {
@@ -8,16 +10,13 @@ class SignUp extends React.Component {
         };
     }
 
-    handleClick() {
+    handleClick = (e)  => {
         this.setState( {
-            userType: this.state.userType
+            userType: e.target.dataset.type
         });
-        alert("user type: " + this.userType);
     }
 
     render() {
-        alert("signup rendered");
-
         const linkStyle = {
             textDecoration: "none",
             color: "#000"
@@ -26,11 +25,16 @@ class SignUp extends React.Component {
         return (
             <div className="SignUp">
                 <h2>Sign Up</h2>
-                <p>Select User Type</p>
-                <button type="button" className="user" onClick={this.handleClick}>Beta Tester</button>  
-                <p>or</p>         
-                <button type="button" className="user" onClick={this.handleClick}>Product Owner</button> 
-                <p>Already have and account? <a href="./login.js" style={linkStyle}>Login</a></p>
+                <p>Already have an account? <a href="./login.js" style={linkStyle}>Login</a></p>
+                {this.state.userType === "" && (<>
+                    <p>Select User Type</p>
+                    <button type="button" className="user" data-type="Beta Tester" onClick={this.handleClick}>Beta Tester</button>  
+                    <p>or</p>         
+                    <button type="button" className="user" data-type="Product Owner" onClick={this.handleClick}>Product Owner</button> 
+                </>)}
+                {this.state.userType !== "" && <p>Signing up as a {this.state.userType}</p>}
+                {this.state.userType === "Beta Tester" && <TesterForm />}
+                {this.state.userType === "Product Owner" && <OwnerForm />}
             </div>
         );
     }

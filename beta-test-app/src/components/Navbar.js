@@ -9,6 +9,7 @@ import {
     Route,
     Link
   } from "react-router-dom";
+import SignUp from "./SignUp";
 
 const navbarStyles = {
     link: {
@@ -56,7 +57,9 @@ function Navbar() {
                 <Route path="/about" element={<About />} />
                 <Route path="/user" element={<User />} />
                 <Route path="/packages" element={<Packages />} />
-                <Route path="/Login.js" element={<Login />} />
+                <Route path="/login.js" element={<Login />} />
+                <Route path="/signup.js" element={<SignUp />} />
+
             </Routes>
         </BrowserRouter>
     );
