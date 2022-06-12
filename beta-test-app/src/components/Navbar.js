@@ -10,7 +10,7 @@ import {
     Link
   } from "react-router-dom";
 import SignUp from "./SignUp";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { useState } from "react";
 
 const navbarStyles = {
@@ -46,6 +46,7 @@ function Navbar() {
         } else {
           // User is signed out
           // ...
+          setUser(undefined);
         }
       });
 
@@ -66,11 +67,11 @@ function Navbar() {
                     <li style={navbarStyles.item}>
                         <Link to="/packages" style={navbarStyles.link}>Packages</Link>
                     </li>
-                    <li style={navbarStyles.item}>
+                    {!user && <li style={navbarStyles.item}>
                         <a href="login.js" style={navbarStyles.link}>Login</a>
                         {/* <Link to="/login" style={navbarStyles.link}>Login</Link> */}
-                    </li>
-                    {user && <p>Logged in as {user.email}</p>}
+                    </li>}
+                    {user && <p>Logged in as {user.email}. <button onClick={(e) => signOut(auth)}>Sign out</button></p>}
                     
                 </ul>
             </div>
