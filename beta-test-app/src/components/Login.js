@@ -42,7 +42,7 @@ class Login extends React.Component {
                 console.log(errorCode, errorMessage);
                 this.setState({
                     ...this.state,
-                    error: errorCode
+                    error: errorMessage
                 })
                 });
         }
@@ -58,7 +58,7 @@ class Login extends React.Component {
             <div className="login">
                 <form onSubmit={this.handleSubmit}>
                     <h2>Login</h2>
-                    {this.state.error && <p style={{color: "red"}}>An error occurred: {this.state.error}</p>}
+                    {this.state.error && <p style={{color: "red"}}>{this.state.error}</p>}
                     <label>
                         <p>Email</p>
                         <input type="email" name="email" value={this.state.email} onChange={this.handleInputChange} required />

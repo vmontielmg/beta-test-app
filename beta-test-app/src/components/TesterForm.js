@@ -20,12 +20,20 @@ class TesterForm extends React.Component {
                     const user = userCredential.user;
                     // ...
                     console.log(user);
+                    this.setState({
+                        ...this.state,
+                        error: null
+                    });
                   })
                   .catch((error) => {
                     const errorCode = error.code;
                     const errorMessage = error.message;
                     // ..
                     console.log(errorCode, errorMessage);
+                    this.setState({
+                        ...this.state,
+                        error: errorMessage
+                    })
                   });
             } else {
                 alert("Passwords do not match")
@@ -43,6 +51,7 @@ class TesterForm extends React.Component {
     render() {
         return (
             <div className="testerForm">
+                                {this.state.error && <p style={{color: "red"}}>{this.state.error}</p>}
                 <form onSubmit={this.handleSubmit}>
                 <label> First Name
                         <input type="text" name="firstName" onChange={this.onChange} />
