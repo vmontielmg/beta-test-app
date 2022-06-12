@@ -27,3 +27,16 @@ a, a:visited, a:active{
 .navmenu:visited, .navmenu:active {
   color: #FFF;
 }
+
+.testerForm form {
+  padding: 10px;
+}
+
+.testerForm form > * {
+  display: block;
+}
+
+.testerForm form label {
+  display: flex;
+  justify-content: space-between;
+}

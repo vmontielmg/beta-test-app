@@ -2,6 +2,7 @@ import { AuthErrorCodes } from "firebase/auth";
 import React from "react";
 import OwnerForm from "./OwnerForm";
 import TesterForm from "./TesterForm";
+import "../index.css";
 
 class SignUp extends React.Component {
     constructor(props) {

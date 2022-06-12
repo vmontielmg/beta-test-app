@@ -1,5 +1,23 @@
 import React from "react";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { components } from "react-select";
+import { default as ReactSelect } from "react-select";
+
+const Option = (props) => {
+  return (
+    <div>
+      <components.Option {...props}>
+        <input
+          type="checkbox"
+          checked={props.isSelected}
+          onChange={() => null}
+        />{" "}
+        <label>{props.label}</label>
+      </components.Option>
+    </div>
+  );
+};
+
 class TesterForm extends React.Component {
     constructor(props) {
         super(props);
@@ -40,6 +58,12 @@ class TesterForm extends React.Component {
             }
         }
     }
+   
+    handleChange = (selected) => {
+        this.setState({
+          optionSelected: selected
+        });
+      };
 
     onChange = (e) => {
         this.setState({
@@ -49,33 +73,113 @@ class TesterForm extends React.Component {
     }
 
     render() {
+        const loginStyles = {
+            card: {
+                width: "auto",
+                margin: "0 auto",
+                marginTop: "5%",
+                height: "auto",
+                backgroundColor: "#FFFEFB",
+                color: "#0D3B66",
+                padding: "5% 3%"
+            },
+            input: {
+                width: 100,
+                height: 15,
+                borderRadius: 5,
+                margin: 0,
+                padding: 5,
+                float: "right"
+            },
+            submit: {
+                border: "0.5px solid 0D3B66",
+                borderRadius: 8,
+                backgroundColor: "#2084E2",
+                color: "#FFF",
+                width: "40%",
+                height: 40,
+                marginTop: 30,
+                fontSize: "large"
+            },
+            option: {
+                backgroundColor: "#ddd",
+                border: "none",
+                color: "red",
+                padding: "10px 20px",
+                textAlign: "center",
+                textDecoration: "none",
+                display: "inline-block",
+                margin: "4px 2px",
+                cursor: "pointer",
+                borderRadius: "16px"
+            }
+        }
+
         return (
+            <div className="signupCard"  style={loginStyles.card}>
             <div className="testerForm">
                                 {this.state.error && <p style={{color: "red"}}>{this.state.error}</p>}
                 <form onSubmit={this.handleSubmit}>
-                <label> First Name
-                        <input type="text" name="firstName" onChange={this.onChange} />
+                <label> <p>First Name
+                        <input type="text" name="firstName" onChange={this.onChange} style={loginStyles.input}/>
+                        </p>
                     </label>
-                    <label> Last Name
-                        <input type="text" name="lastName" onChange={this.onChange}  />
+                    <label> <p>Last Name
+                        <input type="text" name="lastName" onChange={this.onChange} style={loginStyles.input}  />
+                        </p>
                     </label>
-                    <label> Email
-                        <input type="email" name="email" onChange={this.onChange} />
+                    <label> <p>Email
+                        <input type="email" name="email" onChange={this.onChange} style={loginStyles.input} />
+                        </p>
                     </label>
-                    <label> Password
-                        <input type="password" name="password" onChange={this.onChange} />
+                    <label> <p>Password
+                        <input type="password" name="password" onChange={this.onChange} style={loginStyles.input} />
+                        </p>
                     </label>
-                    <label> Confirm Password
-                        <input type="password" name="passwordConfirm" onChange={this.onChange} />
+                    <label> <p>Confirm Password
+                        <input type="password" name="passwordConfirm" onChange={this.onChange} style={loginStyles.input} />
+                        </p>
                     </label>
-                    <label> Optional: Select any labels you feel comfortable indentifying yourself with
-                        <input type="checkbox" id="" name="" value="" />
+                    <label> <p>Optional: Select any labels you feel comfortable indentifying yourself with </p>
                     </label>
-                    <button type="submit">Submit</button>
+                    
+                    <span 
+                        class="d-inline-block"
+                        data-toggle="popover"
+                        data-trigger="focus"
+                        data-content="Please select account(s)">
+                        
+                        <ReactSelect
+                            options={labelOptions}
+                            isMulti
+                            closeMenuOnSelect={false}
+                            hideSelectedOptions={false}
+                            components={{
+                                Option
+                            }}
+                            onChange={this.handleChange}
+                            allowSelectAll={true}
+                            value={this.state.optionSelected}
+                        />
+                    </span>
+                    <button type="submit" style={loginStyles.submit}>Submit</button>
                 </form>
+            </div>
+            
             </div>
         );
     }
 }
+
+export const labelOptions = [
+    { value: "atester1", label: "Accessibility Tester - Design" },
+    { value: "atester2", label: "Accessibility Tester - Color" },
+    { value: "atester3", label: "Accessibility Tester - " },
+    { value: "ftester1", label: "Functionality Tester" },
+    { value: "games", label: "Topic - Games" },
+    { value: "healthtech", label: "Topic - HealthTech" },
+    { value: "edtech", label: "Topic - EdTech" },
+    { value: "matureage", label: "Topic - Mature Age" }
+  ];
 
 export default TesterForm;
