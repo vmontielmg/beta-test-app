@@ -34,6 +34,7 @@ class Login extends React.Component {
                     ...this.state,
                     error: null
                 });
+                alert("You should now be logged in!")
                 })
                 .catch((error) => {
                 const errorCode = error.code;
