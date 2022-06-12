@@ -7,6 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
+import { getDatabase } from "firebase/database";
 import SignUp from './components/SignUp';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -16,6 +17,7 @@ import SignUp from './components/SignUp';
 const firebaseConfig = {
   apiKey: "AIzaSyCkScENHD3ipWfnGrNW8f6wfSzOLVDScmY",
   authDomain: "beta-test-app.firebaseapp.com",
+  databaseURL: "https://beta-test-app-default-rtdb.europe-west1.firebasedatabase.app/",
   projectId: "beta-test-app",
   storageBucket: "beta-test-app.appspot.com",
   messagingSenderId: "519416498562",
@@ -27,6 +29,7 @@ const firebaseConfig = {
 export const app = initializeApp(firebaseConfig);
 export const analytics = getAnalytics(app);
 export const auth = getAuth(app);
+export const database = getDatabase(app);
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

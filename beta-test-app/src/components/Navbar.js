@@ -11,7 +11,8 @@ import {
   } from "react-router-dom";
 import SignUp from "./SignUp";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getDatabase, onValue, ref } from "firebase/database";
 
 const navbarStyles = {
     link: {
@@ -32,23 +33,35 @@ const navbarStyles = {
 
 function Navbar() {
     const [user, setUser] = useState();
+    const [userInfo, setUserInfo] = useState();
     const auth = getAuth();
-    onAuthStateChanged(auth, (u) => {
-        if (u) {
-          // User is signed in, see docs for a list of available properties
-          // https://firebase.google.com/docs/reference/js/firebase.User
-          const uid = u.uid;
-          // ...
-        //   console.log(u);
-          setUser(u)
-        } else {
-          // User is signed out
-          // ...
-          setUser(undefined);
-        }
-      });
 
-      console.log(user);
+
+      useEffect(() => {
+        onAuthStateChanged(auth, (u) => {
+            if (u) {
+                // User is signed in, see docs for a list of available properties
+                // https://firebase.google.com/docs/reference/js/firebase.User
+                const uid = u.uid;
+                // ...
+            //   console.log(u);
+                setUser(u);
+                const db = getDatabase();
+                const userRef = ref(db, 'users/' + uid);
+                onValue(userRef, (snapshot) => {
+                const data = snapshot.val();
+                    console.log(data);
+                    setUserInfo(data);
+                });
+                
+            } else {
+                // User is signed out
+                // ...
+                setUser(undefined);
+            }
+            });
+      }, []);
+
     return (
         <BrowserRouter>
             <div className="navmenu">
@@ -69,7 +82,7 @@ function Navbar() {
                         <a href="login.js" style={navbarStyles.link}>Login</a>
                         {/* <Link to="/login" style={navbarStyles.link}>Login</Link> */}
                     </li>}
-                    {user && <p>Logged in as {user.email}. <button onClick={(e) => signOut(auth)}>Sign out</button></p>}
+                    {user && <p>Logged in as {userInfo?.firstName} {userInfo?.lastName} ({user.email}). <button onClick={(e) => signOut(auth)}>Sign out</button></p>}
                     
                 </ul>
             </div>
