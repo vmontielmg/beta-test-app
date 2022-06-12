@@ -26,10 +26,8 @@ const navbarStyles = {
         display: "inline",
         margin: 0,
         padding: 10
-    },
+    }
 }
-
-
 
 
 function Navbar() {
@@ -53,7 +51,7 @@ function Navbar() {
       console.log(user);
     return (
         <BrowserRouter>
-            <div>
+            <div className="navmenu">
                 <ul className="navbar" style={navbarStyles.menu}>
                     <li style={navbarStyles.item}>
                         <Link to="/feed" style={navbarStyles.link}>Feed</Link>
