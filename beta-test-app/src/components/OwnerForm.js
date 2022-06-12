@@ -42,6 +42,12 @@ class OwnerForm extends React.Component {
         }
     }
 
+    handleChange = (selected) => {
+        this.setState({
+          optionSelected: selected
+        });
+    };
+
     onChange = (e) => {
         this.setState({
             ...this.state,
@@ -50,37 +56,81 @@ class OwnerForm extends React.Component {
     }
 
     render() {
-        return (
-            <div className="ownerForm">
-                                                {this.state.error && <p style={{color: "red"}}>{this.state.error}</p>}
+        const loginStyles = {
+            card: {
+                width: "auto",
+                margin: "0 auto",
+                marginTop: "5%",
+                height: "auto",
+                backgroundColor: "#FFFEFB",
+                color: "#0D3B66",
+                padding: "5% 3%",
+                display: "inline-block"
+            },
+            input: {
+                width: 100,
+                height: 15,
+                borderRadius: 5,
+                margin: 0,
+                padding: 5,
+                float: "right"
+            },
+            submit: {
+                border: "0.5px solid 0D3B66",
+                borderRadius: 8,
+                backgroundColor: "#2084E2",
+                color: "#FFF",
+                width: "40%",
+                height: 40,
+                marginTop: 30,
+                fontSize: "large"
+            },
+            option: {
+                backgroundColor: "#ddd",
+                border: "none",
+                color: "red",
+                padding: "10px 20px",
+                textAlign: "center",
+                textDecoration: "none",
+                display: "inline-block",
+                margin: "4px 2px",
+                cursor: "pointer",
+                borderRadius: "16px"
+            }
+        }
 
-                <form onSubmit={this.handleSubmit}>
-                    <label> First Name
-                        <input type="text" name="firstName" onChange={this.onChange} />
-                    </label>
-                    <label> Last Name
-                        <input type="text" name="lastName" onChange={this.onChange}  />
-                    </label>
-                    <label> Company
-                        <input type="text" name="company" onChange={this.onChange}  />
-                    </label>
-                    <label> Email
-                        <input type="email" name="email" onChange={this.onChange} />
-                    </label>
-                    <label> Password
-                        <input type="password" name="password" onChange={this.onChange} />
-                    </label>
-                    <label> Confirm Password
-                        <input type="password" name="passwordConfirm" onChange={this.onChange} />
-                    </label>
-                    <label> Optional: Select a label for your project...?
-                        <input type="checkbox" id="" name="" value="" />
-                    </label>
-                    <button type="submit" disabled={!(this.state.email && this.state.password && this.state.passwordConfirm)}>Submit</button>
-                </form>
+        return (
+            <div className="signupCard"  style={loginStyles.card}>
+                <div className="ownerForm">
+                                                    {this.state.error && <p style={{color: "red"}}>{this.state.error}</p>}
+
+                    <form onSubmit={this.handleSubmit}>
+                        <label> <p>First Name
+                            <input type="text" name="firstName" onChange={this.onChange} style={loginStyles.input} /> </p>
+                        </label>
+                        <label> <p>Last Name
+                            <input type="text" name="lastName" onChange={this.onChange} style={loginStyles.input}  /> </p>
+                        </label>
+                        <label> <p>Company
+                            <input type="text" name="company" onChange={this.onChange} style={loginStyles.input}  /></p>
+                        </label>
+                        <label> <p>Email
+                            <input type="email" name="email" onChange={this.onChange} style={loginStyles.input} /></p>
+                        </label>
+                        <label> <p>Password
+                            <input type="password" name="password" onChange={this.onChange} style={loginStyles.input} /></p>
+                        </label>
+                        <label> <p>Confirm Password
+                            <input type="password" name="passwordConfirm" onChange={this.onChange} style={loginStyles.input} /></p>
+                        </label>
+                    
+                        <button type="submit"  style={loginStyles.submit} disabled={!(this.state.email && this.state.password && this.state.passwordConfirm)}>Submit</button>
+                    </form>
+                </div>
             </div>
         );
     }
 }
+
 
 export default OwnerForm;

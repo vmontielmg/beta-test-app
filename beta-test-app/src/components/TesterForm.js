@@ -174,12 +174,13 @@ class TesterForm extends React.Component {
 export const labelOptions = [
     { value: "atester1", label: "Accessibility Tester - Design" },
     { value: "atester2", label: "Accessibility Tester - Color" },
-    { value: "atester3", label: "Accessibility Tester - " },
+    { value: "atester3", label: "Accessibility Tester - General" },
     { value: "ftester1", label: "Functionality Tester" },
     { value: "games", label: "Topic - Games" },
     { value: "healthtech", label: "Topic - HealthTech" },
     { value: "edtech", label: "Topic - EdTech" },
-    { value: "matureage", label: "Topic - Mature Age" }
+    { value: "matureage", label: "Topic - Mature Age" },
+    { value: "other", label: "Other" }
   ];
 
 export default TesterForm;
